@@ -1,4 +1,7 @@
 
+using Microsoft.Extensions.Options;
+using WebApplication20260914.Configuration;
+
 namespace WebApplication20260914
 {
     public class Program
@@ -6,6 +9,19 @@ namespace WebApplication20260914
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+
+            builder.Services.AddSingleton<IValidateOptions<SqlServerOptions>, SqlServerOptionsValidator>();
+            builder.Services.AddSingleton<IValidateOptions<RabbitMqOptions>, RabbitMqOptionsValidator>();
+
+            builder.Services
+                .AddOptions<SqlServerOptions>()
+                .Bind(builder.Configuration.GetSection(SqlServerOptions.SectionName))
+                .ValidateOnStart();
+
+            builder.Services
+                .AddOptions<RabbitMqOptions>()
+                .Bind(builder.Configuration.GetSection(RabbitMqOptions.SectionName))
+                .ValidateOnStart();
 
             // Add services to the container.
 
