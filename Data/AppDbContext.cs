@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using WebApplication20260914.Data.Entities;
+using PromotionEntity = WebApplication20260914.Data.Entities.Promotion;
 
 namespace WebApplication20260914.Data;
 
@@ -14,9 +15,11 @@ public partial class AppDbContext : DbContext
 
     public virtual DbSet<Customer> Customers { get; set; }
 
+    public virtual DbSet<Family> Families { get; set; }
+
     public virtual DbSet<Item> Items { get; set; }
 
-    public virtual DbSet<Promotion> Promotions { get; set; }
+    public virtual DbSet<PromotionEntity> Promotions { get; set; }
 
     public virtual DbSet<PromotionParticipant> PromotionParticipants { get; set; }
 
@@ -43,6 +46,18 @@ public partial class AppDbContext : DbContext
                 .IsUnicode(false);
         });
 
+        modelBuilder.Entity<Family>(entity =>
+        {
+            entity.ToTable("Family");
+
+            entity.Property(e => e.FamilyId)
+                .HasMaxLength(50)
+                .IsUnicode(false);
+            entity.Property(e => e.Description)
+                .HasMaxLength(200)
+                .IsUnicode(false);
+        });
+
         modelBuilder.Entity<Item>(entity =>
         {
             entity.ToTable("Item");
@@ -60,7 +75,7 @@ public partial class AppDbContext : DbContext
             entity.Property(e => e.UnitVol).HasDefaultValue(1f, "DF_Item_UnitVol");
         });
 
-        modelBuilder.Entity<Promotion>(entity =>
+        modelBuilder.Entity<PromotionEntity>(entity =>
         {
             entity.ToTable("Promotion");
 

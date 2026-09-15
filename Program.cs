@@ -6,6 +6,10 @@ using FluentValidation.AspNetCore;
 using WebApplication20260914.Data;
 using WebApplication20260914.Configuration;
 using WebApplication20260914.Controllers.Validators;
+using WebApplication20260914.Masterdata.Repository;
+using WebApplication20260914.Masterdata.Service;
+using WebApplication20260914.Promotion.Repository;
+using WebApplication20260914.Promotion.Service;
 
 namespace WebApplication20260914
 {
@@ -39,6 +43,19 @@ namespace WebApplication20260914
             builder.Services.AddFluentValidationAutoValidation();
             builder.Services.AddControllers();
             builder.Services.AddValidatorsFromAssemblyContaining<RabbitMqPublishRequestDtoValidator>();
+
+            builder.Services.AddScoped<IFamilyRepository, FamilyRepository>();
+            builder.Services.AddScoped<IItemRepository, ItemRepository>();
+            builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
+            builder.Services.AddScoped<IPromotionRepository, PromotionRepository>();
+            builder.Services.AddScoped<IPromotionParticipantRepository, PromotionParticipantRepository>();
+
+            builder.Services.AddScoped<IFamilyService, FamilyService>();
+            builder.Services.AddScoped<IItemService, ItemService>();
+            builder.Services.AddScoped<ICustomerService, CustomerService>();
+            builder.Services.AddScoped<IPromotionService, PromotionService>();
+            builder.Services.AddScoped<IPromotionParticipantService, PromotionParticipantService>();
+
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
             // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi

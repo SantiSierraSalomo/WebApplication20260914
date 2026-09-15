@@ -20,11 +20,4 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="10.2.3" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Masterdata\Repository\" />
-    <Folder Include="Masterdata\Service\" />
-    <Folder Include="Promotion\Repository\" />
-    <Folder Include="Promotion\Service\" />
-  </ItemGroup>
-
 </Project>
