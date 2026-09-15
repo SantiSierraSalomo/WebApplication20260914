@@ -10,6 +10,8 @@ public interface IPromotionParticipantRepository
 
     Task AddAsync(PromotionParticipant participant, CancellationToken cancellationToken);
 
+    Task<long> AddList(IReadOnlyList<PromotionParticipant> participants, CancellationToken cancellationToken);
+
     Task UpdateAsync(PromotionParticipant participant, CancellationToken cancellationToken);
 
     Task<bool> DeleteAsync(string promotionId, string itemId, string customerId, CancellationToken cancellationToken);

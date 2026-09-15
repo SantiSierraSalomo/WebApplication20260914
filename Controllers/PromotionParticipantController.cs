@@ -56,4 +56,14 @@ public sealed class PromotionParticipantController(IPromotionParticipantService 
         var deleted = await service.DeleteAsync(promotionId, itemId, customerId, cancellationToken);
         return deleted ? NoContent() : NotFound();
     }
+
+    [HttpPost("CreateParticipants")]
+    public async Task<ActionResult> CreateParticipants(CancellationToken cancellationToken)
+    {
+        var recordCount = await service.CreateParticipantsAsync(cancellationToken);
+        return CreatedAtAction(
+            nameof(CreateParticipants),
+            new { recordCount = recordCount },
+            recordCount);
+    }
 }

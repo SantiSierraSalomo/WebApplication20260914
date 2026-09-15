@@ -28,6 +28,12 @@ public sealed class PromotionParticipantRepository(AppDbContext dbContext) : IPr
         await dbContext.SaveChangesAsync(cancellationToken);
     }
 
+    public async Task<long> AddList(IReadOnlyList<PromotionParticipant> participants, CancellationToken cancellationToken)
+    {
+        await dbContext.PromotionParticipants.AddRangeAsync(participants, cancellationToken);
+        return await dbContext.SaveChangesAsync(cancellationToken);
+    }
+
     public async Task UpdateAsync(PromotionParticipant participant, CancellationToken cancellationToken)
     {
         dbContext.PromotionParticipants.Update(participant);

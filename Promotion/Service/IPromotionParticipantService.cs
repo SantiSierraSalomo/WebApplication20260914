@@ -10,6 +10,8 @@ public interface IPromotionParticipantService
 
     Task<PromotionParticipantDto> CreateAsync(CreatePromotionParticipantDto request, CancellationToken cancellationToken);
 
+    Task<long> CreateParticipantsAsync(CancellationToken cancellationToken);
+
     Task<PromotionParticipantDto?> UpdateAsync(string promotionId, string itemId, string customerId, UpdatePromotionParticipantDto request, CancellationToken cancellationToken);
 
     Task<bool> DeleteAsync(string promotionId, string itemId, string customerId, CancellationToken cancellationToken);
