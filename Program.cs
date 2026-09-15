@@ -1,5 +1,7 @@
 
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
+using WebApplication20260914.Data;
 using WebApplication20260914.Configuration;
 
 namespace WebApplication20260914
@@ -22,6 +24,12 @@ namespace WebApplication20260914
                 .AddOptions<RabbitMqOptions>()
                 .Bind(builder.Configuration.GetSection(RabbitMqOptions.SectionName))
                 .ValidateOnStart();
+
+            builder.Services.AddDbContext<AppDbContext>((serviceProvider, options) =>
+            {
+                var sqlServerOptions = serviceProvider.GetRequiredService<IOptions<SqlServerOptions>>().Value;
+                options.UseSqlServer(sqlServerOptions.ConnectionString);
+            });
 
             // Add services to the container.
 
