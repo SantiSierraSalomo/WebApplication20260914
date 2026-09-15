@@ -21,6 +21,16 @@ public sealed class RabbitMqOptionsValidator : IValidateOptions<RabbitMqOptions>
             return ValidateOptionsResult.Fail("RabbitMq:Port must be between 1 and 65535.");
         }
 
+        if (string.IsNullOrWhiteSpace(options.UserName))
+        {
+            return ValidateOptionsResult.Fail("RabbitMq:UserName is required.");
+        }
+
+        if (string.IsNullOrWhiteSpace(options.Password))
+        {
+            return ValidateOptionsResult.Fail("RabbitMq:Password is required.");
+        }
+
         return ValidateOptionsResult.Success;
     }
 }
