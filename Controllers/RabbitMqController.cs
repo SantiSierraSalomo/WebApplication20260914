@@ -18,41 +18,6 @@ public class RabbitMqController(IOptions<RabbitMqOptions> rabbitMqOptions) : Con
     [HttpPost("publish")]
     public async Task<ActionResult> Publish([FromBody] RabbitMqPublishRequestDto request, CancellationToken cancellationToken)
     {
-        if (request is null)
-        {
-            return BadRequest("Request body is required.");
-        }
-
-        //if (string.IsNullOrWhiteSpace(request.RoutingKey))
-        //{
-        //    return BadRequest("RoutingKey is required.");
-        //}
-
-        if (request.Body is null)
-        {
-            return BadRequest("Body is required.");
-        }
-
-        if (string.IsNullOrWhiteSpace(request.Header1))
-        {
-            return BadRequest("Header1 is required.");
-        }
-
-        if (string.IsNullOrWhiteSpace(request.Header2))
-        {
-            return BadRequest("Header2 is required.");
-        }
-
-        if (string.IsNullOrWhiteSpace(request.UserId))
-        {
-            return BadRequest("UserId is required.");
-        }
-
-        if (string.IsNullOrWhiteSpace(request.AppId))
-        {
-            return BadRequest("AppId is required.");
-        }
-
         try
         {
             var factory = CreateConnectionFactory();

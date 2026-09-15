@@ -1,8 +1,11 @@
 
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using WebApplication20260914.Data;
 using WebApplication20260914.Configuration;
+using WebApplication20260914.Controllers.Validators;
 
 namespace WebApplication20260914
 {
@@ -33,7 +36,9 @@ namespace WebApplication20260914
 
             // Add services to the container.
 
+            builder.Services.AddFluentValidationAutoValidation();
             builder.Services.AddControllers();
+            builder.Services.AddValidatorsFromAssemblyContaining<RabbitMqPublishRequestDtoValidator>();
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
             // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
